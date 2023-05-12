@@ -8,7 +8,7 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Password</th>
-      <th scope="col">Date</th>
+      <th scope="col">Upload files</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,8 @@
       <td>{{$user['name']}}</td>
       <td>{{$user['email']}}</td>
       <td>{{$user['password']}}</td>
-      <td>{{$user['past']}}</td>
+      <td><img src="/uploads/uploads/{{$user['file_upload']}}" alt="" style="height:20px"></td>
+      <td><a href={{"delete/" . $user['id']}} class="btn btn-danger">Delete</a></td>
     </tr>
     @endforeach
   </tbody>

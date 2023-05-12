@@ -34,3 +34,5 @@ Route::post('register', 'App\Http\Controllers\RegisterController@check');
 Route::get('/showuser', 'App\Http\Controllers\RegisterController@show');
 
 Route::get('/showuserbyid/{id}', 'App\Http\Controllers\RegisterController@showbyid');
+
+Route::get('delete/{id}','App\Http\Controllers\RegisterController@delete');

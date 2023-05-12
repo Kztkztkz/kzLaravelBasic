@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('confirm_password');
+            $table->string('file_upload');
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
     Register
   </div>
   <div class="card-body">
-  <form action="register" method="POST">
+  <form action="register" method="POST" enctype="multipart/form-data">
     @csrf
   <div class="form-group row d-flex justify-content-center">
     <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -37,6 +37,13 @@
       <span class="text-danger">@error('password_confirmation'){{$message}} @enderror</span>
     </div>
   </div>
+  <div class="form-group row d-flex justify-content-center mt-3">
+  <label class="col-form-label col-sm-2" for="customFile">Upload Image</label>
+  <div class="col-sm-6">
+<input type="file" class="form-control" id="customFile" name="fileupload"/>
+<span class="text-danger">@error('fileupload'){{$message}}@enderror</span>
+</div>
+</div>
   <div class="offset-4 mt-3">
     <button type="submit" class="btn btn-primary">Register</button>
   </div>

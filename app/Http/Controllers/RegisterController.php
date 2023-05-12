@@ -14,7 +14,8 @@ class RegisterController extends Controller
             'email'=>'required',
             // thanks >> https://techvblogs.com/blog/password-and-confirm-password-validation-in-laravel#:~:text=On%20the%20backend%20validation%2C%20you,user%20must%20be%20named%20password_confirmation.
             'password'=>'required|confirmed',
-            'password_confirmation'=>'required'
+            'password_confirmation'=>'required',
+            'fileupload'=>'required'
         ]);
 
         $register= new Register;
@@ -22,6 +23,11 @@ class RegisterController extends Controller
         $register->email = $request->email;
         $register->password = $request->password;
         $register->confirm_password = $request->password_confirmation;
+        if($request->file()){
+            $fileName=time().'_'.$request->file('fileupload')->getClientOriginalName();
+            $request->file('fileupload')->storeAs('uploads',$fileName,'public_uploads');
+            $register->file_upload = $fileName;
+        }
         $register->save();
         return redirect('home');
     }
@@ -45,5 +51,11 @@ class RegisterController extends Controller
             $specific = Register::where('id', $id)->get();
             return view('showuserbyid', compact('specific'));
         // return "something";
+    }
+
+    function delete($id){
+        $del = Register::find($id);
+        unlink('uploads\uploads/'.$del->file_upload);
+        return redirect('home');
     }
 }
