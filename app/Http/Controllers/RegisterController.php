@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Register;
 use Carbon\Carbon;
+use File;
 
 class RegisterController extends Controller
 {
@@ -25,7 +26,7 @@ class RegisterController extends Controller
         $register->confirm_password = $request->password_confirmation;
         if($request->file()){
             $fileName=time().'_'.$request->file('fileupload')->getClientOriginalName();
-            $request->file('fileupload')->storeAs('uploads',$fileName,'public_uploads');
+            $request->file('fileupload')->storeAs('uploads',$fileName,'public');
             $register->file_upload = $fileName;
         }
         $register->save();
@@ -55,7 +56,8 @@ class RegisterController extends Controller
 
     function delete($id){
         $del = Register::find($id);
-        unlink('uploads\uploads/'.$del->file_upload);
+        // unlink('uploads\uploads/'.$del->file_upload);
+        File::delete(public_path('storage\uploads/'. $del->file_upload));
         return redirect('home');
     }
 }
