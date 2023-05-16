@@ -18,7 +18,7 @@
       <td>{{$user['name']}}</td>
       <td>{{$user['email']}}</td>
       <td>{{$user['password']}}</td>
-      <td><img src="/storage/uploads/{{$user['file_upload']}}" alt="" style="height:20px"></td>
+      <td><img src="{{Storage::url($user['file_upload'])}}" alt="" style="height:20px"></td>
       <td><a href={{"delete/" . $user['id']}} class="btn btn-danger">Delete</a></td>
     </tr>
     @endforeach

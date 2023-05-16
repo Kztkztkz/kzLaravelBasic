@@ -11,8 +11,12 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
   <a class="navbar-brand mx-5" href="{{route('home')}}">Laravel</a>
   <form class="form-inline">
-  <a class="navbar-brand" href="{{route('login')}}">Login</a>
-  <a class="navbar-brand me-5" href="{{route('register')}}">Register</a>
+  @if (auth()->guard('admin')->guest()) 
+  <a class="navbar-brand" href="{{route('login')}}">Login</a> 
+  <a class="navbar-brand me-5" href="{{route('adminregister')}}">Register</a> 
+ @else
+  <a class="navbar-brand me-5" href="{{url('logout')}}">Logout</a>
+ @endguest
   </form>
 </nav>
   @yield('content')
