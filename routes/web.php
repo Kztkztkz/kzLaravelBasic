@@ -45,8 +45,7 @@ Route::get('delete/{id}','App\Http\Controllers\RegisterController@delete');
 
 Route::get('/adminregister',function(){
     return view('adminregister');
-})->name('adminregister');
+})->name('adminregister')->middleware('loginRegisterRedirect');
 
 Route::post('adminregister', 'App\Http\Controllers\AdminController@registeradmin');
-
 Route::get('/logout','App\Http\Controllers\AdminController@logout');

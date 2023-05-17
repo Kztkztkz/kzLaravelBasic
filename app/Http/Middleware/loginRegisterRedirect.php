@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class userAccess
+class loginRegisterRedirect
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,9 @@ class userAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->guard('admin')->check() && auth()->guard('admin')->user()->is_owner == 1)
-        {
-            return $next($request);
+        if(auth()->guard('admin')->check()){
+            return redirect('home');
         }
-
-        return response()->json(["You don't have permission to access this page"]);
+         return $next($request);
     }
 }

@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $register->name = $request->name;
         $register->email = $request->email;
         $register->password = $request->password;
-        $register->confirm_password = $request->password_confirmation;
+        $register->confirm_password = bcrypt($request->password_confirmation);
         if($request->file()){
             $fileName=time().'_'.$request->file('fileupload')->getClientOriginalName();
             $path = $request->file('fileupload')->storeAs('uploads',$fileName,'public');
