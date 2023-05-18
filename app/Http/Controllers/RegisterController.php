@@ -7,6 +7,8 @@ use App\Models\Register;
 use Carbon\Carbon;
 // use File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterUser;
 
 class RegisterController extends Controller
 {
@@ -30,7 +32,14 @@ class RegisterController extends Controller
             $path = $request->file('fileupload')->storeAs('uploads',$fileName,'public');
             $register->file_upload = $path;
         }
+
+        $email = $request->get('email');
+        dispatch(function () use ($email){
+        Mail::to($email)->send(new RegisterUser($email));
+    });
+
         $register->save();
+        
         return redirect('home');
     }
 
